@@ -388,7 +388,6 @@ public class TreeParser
             	case StreamTokenizer.TT_WORD:
                     try {
                         double nval = Double.parseDouble(tokenizer.sval);
-                        System.out.println(tokenizer.sval + " = " + nval);
 
                         if (nameNext)
                             lastNamed = popAndName(tokenizer.sval, nodeStack);
@@ -404,7 +403,6 @@ public class TreeParser
                         nameNext = false;
                         break;
                     } catch (NumberFormatException e) {
-                        System.out.println("no cigar = " + tokenizer.sval);
                         if (!nameNext)
                             System.err.println("Error: didn't expect this name here: " + tokenizer.sval);
                         lastNamed = popAndName(tokenizer.sval, nodeStack);
