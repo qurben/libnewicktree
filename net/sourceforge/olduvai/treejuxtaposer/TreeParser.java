@@ -271,6 +271,11 @@ public class TreeParser
     public TreeParser(BufferedReader b)
     {
         tokenizer = new StreamTokenizer(b);
+        tokenizer.resetSyntax();
+        tokenizer.wordChars('a', 'z');
+        tokenizer.wordChars('A', 'Z');
+        tokenizer.wordChars(128 + 32, 255);
+
         tokenizer.eolIsSignificant(false);
         tokenizer.quoteChar('"');
 //        tokenizer.quoteChar('\''); // TODO: check quote layering, quoted quotes
@@ -283,7 +288,7 @@ public class TreeParser
         tokenizer.wordChars('*', '+'); // 42-43
         // 44 = , newick
         tokenizer.wordChars('-', '/'); // 45-47
-        // 48-59 = [0-9]:;
+        tokenizer.wordChars('0', '9'); // 48-59 = [0-9]:;
         tokenizer.wordChars('<', '<'); // 60
         // 61 = = nexus
         tokenizer.wordChars('>', '@'); // 62-64
@@ -381,26 +386,32 @@ public class TreeParser
 //            	case quote:
             	case doubleQuote:
             	case StreamTokenizer.TT_WORD:
-            	    if (!nameNext)
-            	        System.err.println("Error: didn't expect this name here: " + tokenizer.sval);
-            	    lastNamed = popAndName(tokenizer.sval, nodeStack);
-            		progress += tokenizer.sval.length();
-            		nameNext = false;
-            		break;
-            	case StreamTokenizer.TT_NUMBER:
-            		if (nameNext)
-            		    lastNamed = popAndName(tokenizer.sval, nodeStack);
-            		else
-            		{
-            		    if (lastNamed != null)
-            		        lastNamed.setWeight(tokenizer.nval);
-            		    else
-            		        System.err.println("Error: can't set value " + tokenizer.nval + " to a null node");
-            		    lastNamed = null;
-            		}
-            		progress += (new Double(tokenizer.nval).toString()).length();
-            		nameNext = false;
-            		break;
+                    try {
+                        double nval = Double.parseDouble(tokenizer.sval);
+                        System.out.println(tokenizer.sval + " = " + nval);
+
+                        if (nameNext)
+                            lastNamed = popAndName(tokenizer.sval, nodeStack);
+                        else
+                        {
+                            if (lastNamed != null)
+                                lastNamed.setWeight(nval);
+                            else
+                                System.err.println("Error: can't set value " + nval + " to a null node");
+                            lastNamed = null;
+                        }
+                        progress += tokenizer.sval.length();
+                        nameNext = false;
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("no cigar = " + tokenizer.sval);
+                        if (!nameNext)
+                            System.err.println("Error: didn't expect this name here: " + tokenizer.sval);
+                        lastNamed = popAndName(tokenizer.sval, nodeStack);
+                        progress += tokenizer.sval.length();
+                        nameNext = false;
+                        break;
+                    }
             	case infoSeparator:
             	    if (nameNext)
             	        lastNamed = popAndName(null, nodeStack);
