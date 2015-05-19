@@ -2,13 +2,39 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>libnewicktree</groupId>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
+
+    <groupId>com.github.qurben</groupId>
     <artifactId>libnewicktree</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
 
     <name>Libnewicktree</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/qurben/libnewicktree</url>
 
-    <description>Genome explorer</description>
+    <description>Libnewicktree</description>
+
+    <scm>
+        <connection>scm:git:git@github.com:qurben/libnewicktree.git</connection>
+        <developerConnection>scm:git:git@github.com:qurben/libnewicktree.git</developerConnection>
+        <url>https://github.com/qurben/libnewicktree</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>BSD license</name>
+            <url>http://opensource.org/licenses/BSD-3-Clause</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Gerben Oolbekkink</name>
+            <email>g.j.w.oolbekkink@gmail.com</email>
+            <url>https://github.com/qurben</url>
+        </developer>
+    </developers>
 </project>
