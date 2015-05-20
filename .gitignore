@@ -20,3 +20,4 @@ out
 
 # maven files #
 target/
+settings.xml
