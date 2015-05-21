@@ -10,17 +10,17 @@ This code is based on the TreeJuxtaposer project at:
 
 Only the tree parsing is left from in this project.
 
-# Usage
+## Usage
 
     BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(nwkFile), "UTF-8"));
     TreeParser tp = new TreeParser(fileReader);
     Tree nwkTree = tp.tokenize("Newick Tree");
 
-# Notice
+## Notice
 
 Be careful when choosing a version, the contract might change between, read the javadoc for the specific version.
 
-# Old readme
+## Old readme
 
 Below you will find the old readme from the TreeJuxtaposer project. It is probably not very relevant anymore.
 
