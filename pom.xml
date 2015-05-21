@@ -10,13 +10,13 @@
 
     <groupId>com.github.qurben</groupId>
     <artifactId>libnewicktree</artifactId>
-    <version>0.1</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>Libnewicktree</name>
     <url>https://github.com/qurben/libnewicktree</url>
 
-    <description>Libnewicktree</description>
+    <description>It's a Newick tree parser</description>
 
     <scm>
         <connection>scm:git:git@github.com:qurben/libnewicktree.git</connection>
