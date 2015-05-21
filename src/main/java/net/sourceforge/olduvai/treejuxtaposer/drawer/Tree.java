@@ -1,4 +1,3 @@
-
 /*
    Copyright (c) 2002 Compaq Computer Corporation
 
@@ -73,10 +72,6 @@ public class Tree {
      */
     private int numLeaves = 0;
 
-    // reference for array of leaves in SC.cullingObject
-    /** Split axis reference for leaf recovery (leaves are attached to split line culling objects) */
-    //private StaticSplitAxis leafSplitAxis;
-
     /**
      * Default tree constructor.  Nodes are created by parser and added in later.
      */
@@ -98,10 +93,9 @@ public class Tree {
         fileName = treeToCopy.fileName;
         height = treeToCopy.height;
         key = treeToCopy.key;
-//		leafSplitAxis = new SplitAxis(treeToCopy.leafSplitAxis); // not implemented
         nexusIndex = treeToCopy.nexusIndex;
         nodes = new ArrayList<TreeNode>(treeToCopy.nodes);
-        nodesByName = new HashMap(treeToCopy.nodesByName);
+        nodesByName = new HashMap<String, TreeNode>(treeToCopy.nodesByName);
         numLeaves = treeToCopy.numLeaves;
         root = treeToCopy.root;
     }
@@ -377,7 +371,7 @@ public class Tree {
         numLeaves = leaves.size();
 
         NameComparator myNameComparator = new NameComparator();
-        TreeNode[] sortedLeafArray = (TreeNode[]) leaves.toArray(new TreeNode[leaves.size()]);
+        TreeNode[] sortedLeafArray = leaves.toArray(new TreeNode[leaves.size()]);
         Arrays.sort(sortedLeafArray, myNameComparator);
         int index = 0;
         TreeNode curr = sortedLeafArray[0];
@@ -401,33 +395,6 @@ public class Tree {
             }
             curr = next;
         }
-    }
-
-    /**
-     * Get the leaf associated with the given leaf index.
-     *
-     * @param index A leaf index of interest.
-     * @return The leaf node at the index, or null on error.
-     */
-    public TreeNode getLeaf(int index) {
-//		System.out.println("getting leaf: " + index );
-        return null;
-    }
-
-    /**
-     * Stub function
-     */
-    public float getMinObjectValue() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /**
-     * Stub function
-     */
-    public float getMaxObjectValue() {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
     /**
