@@ -430,7 +430,7 @@ public class Tree {
 /**
  * Comparator class for Strings
  */
-class NameComparator implements Comparator {
+class NameComparator implements Comparator<TreeNode> {
     /**
      * collator object used for string comparison.
      */
@@ -439,9 +439,9 @@ class NameComparator implements Comparator {
     /**
      * String comparator, uses {@link Collator} comparator.
      */
-    public int compare(Object o1, Object o2) {
-        String s1 = ((TreeNode) o1).getName();
-        String s2 = ((TreeNode) o2).getName();
+    public int compare(TreeNode o1, TreeNode o2) {
+        String s1 = o1.getName();
+        String s2 = o2.getName();
         return myCollator.compare(s1, s2);
     }
 
