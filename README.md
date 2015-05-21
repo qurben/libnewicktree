@@ -1,65 +1,28 @@
-What's this?
-============
+# libnewicktree
 
 It's a Newick tree parser:
 
    http://en.wikipedia.org/wiki/Newick_format
 
-This code is *entirely* taken from the TreeJuxtaposer project at:
+This code is based on the TreeJuxtaposer project at:
 
    http://olduvai.sourceforge.net/tj/index.shtml
 
-I refactored the code to separate UI drawing from parsing and Tree
-creation, so this code is purely for Newick parsing and tree generation.
+Only the tree parsing is left from in this project.
 
-How can I use it?
-================
+# Usage
 
-You could do something like this:
+    BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(nwkFile), "UTF-8"));
+    TreeParser tp = new TreeParser(fileReader);
+    Tree nwkTree = tp.tokenize("Newick Tree");
 
-    Tree treeoflife;
-    int current_depth = 0;
+# Notice
 
-    void setup() {
-        BufferedReader r = createReader("treeoflife.tree");
-        TreeParser tp = new TreeParser(r);
-        treeoflife = tp.tokenize(1, "treeoflife", null);
-        int tree_height = treeoflife.getHeight();
-        System.out.println("largest tree height is: " + tree_height);
-        recursive_print(0, 0);
-    }
+Be careful when choosing a version, the contract might change between, read the javadoc for the specific version.
 
-    void recursive_print (int currkey, int currdepth) {
-        TreeNode currNode = treeoflife.getNodeByKey(currkey);
-        int numChildren = currNode.numberChildren();
-        for (int i = 0; i < numChildren; i++) {
-            int childkey = currNode.getChild(i).key;
-            TreeNode childnode = treeoflife.getNodeByKey(childkey);
-            System.out.println("child name is: " + childnode.getName()
-                                 + " depth is: " + currdepth);
-            recursive_print(childkey, currdepth+1);
-        }
-    }
+# Old readme
 
-Who uses it?
-============
-
-The need for a standalone parser came from the tree explorer at:
-
-    http://exploretree.org/
-
-What license is it available under?
-===================================
-
-The TreeJuxtaposer code is under the BSD license, so this code is too.
-
-Who should I contact with a bug report?
-=======================================
-
-Since I stripped out anything that wasn't necessary for exploretree, you
-could first see if what you need is present in the main TreeJuxtaposer 
-source.  If the bug is only in this library, please contact me at 
-chris-libnewick@printf.net instead of bugging the TreeJuxtaposer folks.
+Below you will find the old readme from the TreeJuxtaposer project. It is probably not very relevant anymore.
 
 TreeJuxtaposer Readme
 October 18, 2007
