@@ -51,7 +51,7 @@ import java.text.Collator;
 public class Tree {
 
 	/** The list of nodes of the tree indexed by their keys, indexed by key */ 
-	public ArrayList nodes; 
+	public ArrayList<TreeNode> nodes;
 
 
 	/** 
@@ -59,7 +59,7 @@ public class Tree {
 	 * name to each of them? No! each node has a key and the key is unique
 	 * for nodes. 
 	 */
-	private HashMap nodesByName; 
+	private HashMap<String, TreeNode> nodesByName;
 
 	/** key should be unique for each tree, set by object that creates trees  */
 	private int key;
@@ -77,8 +77,8 @@ public class Tree {
 	 */
 	public Tree() {
 		root = new TreeNode();
-		nodes = new ArrayList();
-		nodesByName = new HashMap();
+		nodes = new ArrayList<TreeNode>();
+		nodesByName = new HashMap<String, TreeNode>();
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class Tree {
 		key = treeToCopy.key;
 //		leafSplitAxis = new SplitAxis(treeToCopy.leafSplitAxis); // not implemented
 		nexusIndex = treeToCopy.nexusIndex;
-		nodes = new ArrayList(treeToCopy.nodes);
+		nodes = new ArrayList<TreeNode>(treeToCopy.nodes);
 		nodesByName = new HashMap(treeToCopy.nodesByName);
 		numLeaves = treeToCopy.numLeaves;
 		root = treeToCopy.root;
@@ -202,7 +202,7 @@ public class Tree {
 	 * @param tn New value for file name.
 	 */
 	public void setFileName(String tn) {
-		fileName = new String(tn);
+		fileName = tn;
 	}
 
 	/**
@@ -226,7 +226,6 @@ public class Tree {
 	public void postProcess() {
 		preorderPostProcess();
 		linkLeaves();
-//		System.out.println("progress bar updated: min:" + jpb.getMinimum() + " max:" + jpb.getMaximum() + " value:" + jpb.getValue());
 	}
 
 	/**
@@ -266,8 +265,8 @@ public class Tree {
 	 */
 	public void setUpNameLists()
 	{
-		nodes = new ArrayList();
-		nodesByName = new HashMap();
+		nodes = new ArrayList<TreeNode>();
+		nodesByName = new HashMap<String, TreeNode>();
 		final char separator = '/'; // separator between name fields
 		for(TreeNode n = root; n != null; n = n.preorderNext)
 		{
@@ -322,18 +321,13 @@ public class Tree {
 	 * @see     #linkNodesInPreorder()
 	 * @see     TreeNode
 	 * @see     NameComparator
-	 * @param jpb Progress bar.
 	 */
 	private void linkLeaves() {
-		int counter = 0;
-		int percentage = 0;
 		TreeNode pren = root.leftmostLeaf;
-		Vector leaves = new Vector();
+		Vector<TreeNode> leaves = new Vector<TreeNode>();
 		leaves.add(pren);
-//		pren.lindex = 0;
 		for(TreeNode n = pren.preorderNext; n!=null; n=n.preorderNext)
 		{
-			counter++;
 			if(n.isLeaf())
 			{
 				leaves.add(n);
@@ -399,12 +393,6 @@ public class Tree {
 	{
 		return nexusIndex;
 	}
-	/**
-	 * @param leafSplitAxis The leafSplitLine to set.
-	 */
-	//public void setLeafSplitAxis(StaticSplitAxis leafSplitAxis) {
-	//	this.leafSplitAxis = leafSplitAxis;
-	//}
 	
 	/**
 	 * Get the leaves under this node.  Used for tree to tree comparison, removing leaf nodes from difference calculations when they only appear in one side of the tree.
@@ -415,7 +403,7 @@ public class Tree {
 	 */
 	public LinkedList getLeaves(TreeNode node)
 	{
-		LinkedList leaves = new LinkedList();
+		LinkedList<TreeNode> leaves = new LinkedList<TreeNode>();
 		TreeNode currNode = node.leftmostLeaf;
 		while (currNode != node.rightmostLeaf)
 		{
