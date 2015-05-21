@@ -356,7 +356,7 @@ public class TreeParser
      * The stream tokenizer should be initialized before calling this function.
      * @param fileLength Length of the file, for progress bar movements.
      * For nexus files, this would be the relative position of the next semicolon = the size of the tree in bytes.
-     * @param streamName Name of the tree or file that is being loaded.  Nexus files have names ("tree <name> = ((...));", newick trees are named by file name.
+     * @param streamName Name of the tree or file that is being loaded.  Nexus files have names, newick trees are named by file name.
      * @param progressBar Reference to a progress bar widgit, embedded perhaps in place of the new canvas for this tree.  If this is null, create a new progress bar here.
      * @return Tree parsed from the stream.
      */

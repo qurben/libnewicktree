@@ -48,7 +48,6 @@ import java.util.*;
  * @author Tamara Munzner, Li Zhang, Yunhong Zhou
  * @version 2.2
  * @see Tree
- * @see GridCell
  */
 public class TreeNode {
 
@@ -62,8 +61,7 @@ public class TreeNode {
 	/** Height of font in font points used to draw the label. */
 	private int fontSize;
 
-	/** Score for a node in [0,1] that corresponds to the topological similarity between two tree drawers.
-	 @see TreePairs#getBestCorrNodeScore(Tree, TreeNode, Tree, int) */
+	/** Score for a node in [0,1] that corresponds to the topological similarity between two tree drawers. */
 	private Double bcnScore;
 
 	// /**
@@ -328,7 +326,7 @@ public class TreeNode {
 	}
 
 	/**
-	 * Set the extreme leaves for this node.  This is done in leaf->root direction, so all linking can be done in O(n) time.
+	 * Set the extreme leaves for this node.  This is done in leaf root direction, so all linking can be done in O(n) time.
 	 *
 	 */
 	public void setExtremeLeaves() {
@@ -341,7 +339,7 @@ public class TreeNode {
 		rightmostLeaf = lastChild().rightmostLeaf;
 	}
 
-	/** root->leaf traversal, depth first in direction of leftmost leaf. */
+	/** root leaf traversal, depth first in direction of leftmost leaf. */
 	public void linkNodesInPreorder() {
 		if (isLeaf())
 			return;
@@ -351,7 +349,7 @@ public class TreeNode {
 		// rightmostLeaf.preorderNext = null; // redundant
 	}
 
-	/** Leaf->root traversal, starting at leftmost leaf of tree. */
+	/** Leaf root traversal, starting at leftmost leaf of tree. */
 	public void linkNodesInPostorder() {
 		if (isLeaf())
 			return;
